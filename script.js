@@ -1,47 +1,96 @@
-//Quiz Questions, with the bet and the correct answer
+// Questions array, with the possible answers and the actual answer
 const questions = [
-    {
-        question: "Who said the line 'I am inevitable'?",
-        bet: ["Thanos", "Loki", "Ultron", "Red Skull"],
-        answer: "Thanos"
-    }, 
-    {
-        question: "What planet was Thanos born on?",
-        bet: ["Titan", "Asgard", "Xandar", "Sakaar"],
-        answer: "Titan"
-    }, 
-    {
-        question: "What metal is Captain America's shield made from?",
-        bet: ["Vibranium", "Adamantium", "Titanium", "Uru"],
-        answer: "Vibranium"
-    }, 
-    {
-        question: "Who almost lifted Thor’s hammer before Endgame?",
-        bet: ["Vision", "Captain America", "Iron Man", "Both Vision and Cap"],
-        answer: "Both Vision and Cap"
-    }
+  {
+    question: "Who said the line 'I am inevitable'?",
+    bet: ["Thanos", "Loki", "Ultron", "Red Skull"],
+    answer: "Thanos"
+  },
+  {
+    question: "What planet was Thanos born on?",
+    bet: ["Titan", "Asgard", "Xandar", "Sakaar"],
+    answer: "Titan"
+  },
+  {
+    question: "What metal is Captain America's shield made from?",
+    bet: ["Vibranium", "Adamantium", "Titanium", "Uru"],
+    answer: "Vibranium"
+  },
+  {
+    question: "Who almost lifted Thor’s hammer before Endgame?",
+    bet: ["Vision", "Captain America", "Iron Man", "Both Vision and Cap"],
+    answer: "Both Vision and Cap"
+  }
 ];
 
-// --- VARIABLES ---
-let currentQuestion = 0;  // keeps track of current question index
-let userAnswers = {};     // stores selected answers
+// VARIABLES
+let currentQuestion = 0;
+let userAnswers = {};
 
-// --- SELECT HTML ELEMENTS ---
 const questionText = document.getElementById("question-text");
-const optionsDiv = document.getElementById("bet");
-const nextBtn = document.getElementById("nextBtn");
-const prevBtn = document.getElementById("prevBtn");
-const quizBox = document.getElementByClass("quizCard");
+const betDiv = document.getElementById("bet");
+const nextBtn = document.getElementById("next-btn");
+const prevBtn = document.getElementById("back-btn");
 const resultBox = document.getElementById("resultBox");
 const scoreText = document.getElementById("scoreText");
 const reviewDiv = document.getElementById("review");
+const quizCard = document.getElementById("quizCard");
 const restartBtn = document.getElementById("restartBtn");
 
-// --- FUNCTION: SHOW QUESTION ---
+// DISPLAY FIRST QUESTION 
+showQuestion(currentQuestion);
+
+// Function for displaying the question 
 function showQuestion(index) {
   const q = questions[index];
   questionText.textContent = q.question;
-
-  // Clear old options
   betDiv.innerHTML = "";
+
+  // Create answer options
+  q.bet.forEach(option => {
+    const label = document.createElement("label");
+    label.innerHTML = `
+      <input type="radio" name="q${index}" value="${option}">
+      <span>${option}</span>
+    `;
+    label.querySelector("input").addEventListener("click", () => {
+      userAnswers[index] = option;
+    });
+    // Keep selected answer checked
+    if (userAnswers[index] === option) {
+      label.querySelector("input").checked = true;
+    }
+    betDiv.appendChild(label);
+  });
+
+  // Button visibility
+  prevBtn.disabled = index === 0;
+  nextBtn.textContent = index === questions.length - 1 ? "Finish" : "Next";
+}
+
+
+// === BUTTON: NEXT ===
+nextBtn.addEventListener("click", () => {
+  // If last question → show result
+  if (currentQuestion === questions.length - 1) {
+    showResults();
+  } else {
+    currentQuestion++;
+    slideCard("next");
+    showQuestion(currentQuestion);
+  }
+});
+
+// === BUTTON: BACK ===
+prevBtn.addEventListener("click", () => {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    slideCard("back");
+    showQuestion(currentQuestion);
+  }
+});
+
+// === SMALL SLIDE ANIMATION FUNCTION ===
+function slideCard(direction) {
+  quizCard.style.transform = direction === "next" ? "translateX(50px)" : "translateX(-50px)";
+  setTimeout(() => (quizCard.style.transform = "translateX(0)"), 200);
 }
