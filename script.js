@@ -68,7 +68,7 @@ function showQuestion(index) {
 }
 
 
-// === BUTTON: NEXT ===
+// BUTTON: NEXT
 nextBtn.addEventListener("click", () => {
   // If last question → show result
   if (currentQuestion === questions.length - 1) {
@@ -80,7 +80,7 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
-// === BUTTON: BACK ===
+// BUTTON: BACK
 prevBtn.addEventListener("click", () => {
   if (currentQuestion > 0) {
     currentQuestion--;
