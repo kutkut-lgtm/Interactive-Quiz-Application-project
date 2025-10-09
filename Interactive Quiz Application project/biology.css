@@ -9,7 +9,7 @@
 
 
 body {
-    background-color: #C23074;
+    background-color: #F27FA6;
 }
 .container {
     background-color: #FDFCF6;;
@@ -49,21 +49,33 @@ body {
     cursor: pointer;
 }
 
-.btn:hover {
-    background: #7860C6;
+.btn:hover:not([disabled]) {
+    background: #F27FA6;
     color: white;
 }
 
-#next-button {
-    background: #7860C6;
-    color: white;
-    font-weight: 600;
+.btn:disabled {
+    cursor: no-drop;
+}
+
+#next-btn {
+    background: #F27FA6;
+    color: #fff;
+    font-weight: 500;
     width: 150px;
+    border: 0;
     padding: 10px;
     margin: 20px auto 0;
-    border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     display: none;
-    justify-content: center;
+}
+
+
+.correct {
+    background: #8BE78B;
+}
+
+.incorrect {
+    background: #F7454A;
 }
