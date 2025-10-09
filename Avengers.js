@@ -67,6 +67,32 @@ function showQuestion(index) {
   nextBtn.textContent = index === questions.length - 1 ? "Finish" : "Next";
 }
 
+// === FUNCTION: SHOW RESULTS ===
+function showResults() {
+  let score = 0;
+  resultBox.style.display = "block";
+  quizCard.style.display = "none";
+
+  reviewDiv.innerHTML = "";
+
+  questions.forEach((q, i) => {
+    const userAns = userAnswers[i];
+    const correct = userAns === q.answer;
+    if (correct) score++;
+
+    const p = document.createElement("p");
+    p.innerHTML = `
+      <strong>Q${i + 1}:</strong> ${q.question}<br>
+      Your answer: <span class="${correct ? 'correct' : 'wrong'}">${userAns || "No answer"}</span><br>
+      Correct answer: <span class="correct">${q.answer}</span>
+    `;
+    reviewDiv.appendChild(p);
+  });
+
+  const percent = Math.round((score / questions.length) * 100);
+  scoreText.textContent = `You got ${score}/${questions.length} correct (${percent}%)`;
+}
+
 
 // BUTTON: NEXT
 nextBtn.addEventListener("click", () => {
@@ -89,8 +115,19 @@ prevBtn.addEventListener("click", () => {
   }
 });
 
-// === SMALL SLIDE ANIMATION FUNCTION ===
+// SMALL SLIDE ANIMATION FUNCTION 
 function slideCard(direction) {
   quizCard.style.transform = direction === "next" ? "translateX(50px)" : "translateX(-50px)";
   setTimeout(() => (quizCard.style.transform = "translateX(0)"), 200);
 }
+
+//BUTTON: RESTART
+restartBtn.addEventListener("click", () => {
+  resultBox.style.display = "none";
+  quizCard.style.display = "block";
+  currentQuestion = 0;
+  userAnswers = {};
+  showQuestion(currentQuestion);
+});
+
+
