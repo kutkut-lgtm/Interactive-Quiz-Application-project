@@ -37,7 +37,7 @@ const questions = [
     },
     {
         question: "What is the normal human body temperature?",
-        answers: [
+        amswers: [
             {text: "100", correct: false},
             {text: "25", correct: false},
             {text: "37", correct: true},
@@ -73,7 +73,7 @@ function showQuestion(){
     resetState();
     let currentQuestion = questions[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML = questionNo = ". " + currentQuestion.
+    questionElement.innerHTML = questionNo + ". " + currentQuestion.
     question;
 
     currentQuestion.answers.forEach(answer => {
