@@ -56,7 +56,7 @@ const questions = [
 ];
 
 const questionElement = document.getElementById("question");
-const answerButton = document.getElementById("answer-button");
+const answerButton = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
 
 let currentQuestionIndex = 0;
@@ -72,9 +72,10 @@ function startQuiz(){
 function showQuestion(){
     let currentQuestion = questions[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML = questionNo = ". " + currentQuestion.question;
+    questionElement.innerHTML = questionNo = ". " + currentQuestion.
+    question;
 
-    currentQuestion.answers.forEach(answer =>{
+    currentQuestion.answers.forEach(answer => {
         const button = document.createElement("button");
         button.innerHTML = answer.text;
         button.classList.add("btn");
@@ -83,3 +84,5 @@ function showQuestion(){
 
     );
 }
+
+startQuiz();
