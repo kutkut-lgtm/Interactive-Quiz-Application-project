@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Kutlwano.css">
-    <title>Video games</title>
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="Videogames.css">
 </head>
+
 <body>
-    <div class="quiz-container">
-        <div id="question-container">
-            <h3 id="question">Question</h3>
-            <div id="answer-buttons"></di>
+    <div class="app">
+        <h1>Video game Quiz🎮</h1>
+        <div class="quiz">
+            <h2 id="question">Question goes here</h2>
+            <div id="answer-buttons">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+            <br>
+            <button id="next-btn">Next</button>
+
+            <a id="back-btn" href="Index.html">Back</a>
+                   
         </div>
-        <button id="next-btn" class="btn hide">Next</button>
-        <div id="result-btn" class=" btn hide"></div>
-        <button id="restart-btn" class="btn hide">Restart</button>
-    
+    </div>
+    <script src="Videogames.js"></script>   
 </body>
+
 </html>
